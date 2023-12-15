@@ -26,12 +26,10 @@ app.use(cors({
     'http://movies.petrosyan.nomoredomainsmonster.ru',
     'https://movies.petrosyan.nomoredomainsmonster.ru'],
 }));
-// логгер запросов
-app.options('*', cors()); // Обрабатывает предварительные запросы для всех маршрутов
 
 // Устанавливает опции для предварительных запросов (pre-flight requests),
 // которые отправляются браузером перед основным запросом.
-// app.options('*', cors());
+app.options('*', cors()); // Обрабатывает предварительные запросы для всех маршрутов
 
 app.use(express.json()); // для собирания JSON-формата
 app.use(cookieParser()); // парсер куки

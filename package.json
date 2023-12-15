@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon --inspect app.js",
-    "lint": "npm eslint ."
+    "eslint": "eslint ."
   },
   "keywords": [],
   "author": "Petrosyan Sergey",

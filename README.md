@@ -1,2 +1,4 @@
 # movies-explorer-api
-backend
+IP 51.250.102.200
+
+Backend https://movies.petrosyan.nomoredomainsmonster.ru
