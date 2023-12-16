@@ -1,12 +1,14 @@
 const { ValidationError, CastError } = require('mongoose').Error;
-const BadRequestError = require('../errors/BadRequestError');
-const ForbiddenError = require('../errors/ForbiddenError');
-const NotFoundError = require('../errors/NotFoundError');
+const {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+} = require('../errors/errors');
 const Movie = require('../models/movie');
 const { STATUS_CODE } = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movies) => res.send(movies))
     .catch(next);
 };

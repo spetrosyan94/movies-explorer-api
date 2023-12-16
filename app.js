@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const helmet = require('helmet');
 
 // После этого env-переменные из файла добавятся в process.env
 require('dotenv').config();
@@ -10,6 +11,7 @@ const { PORT = 3000, DB_ADDRESS } = process.env;
 const { errors } = require('celebrate');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const rateLimit = require('./middlewares/ratelimit');
 const centralErrorHandler = require('./middlewares/centralErrorHandler');
 const routes = require('./routes/index');
 
@@ -33,9 +35,13 @@ app.options('*', cors()); // Обрабатывает предварительн
 
 app.use(express.json()); // для собирания JSON-формата
 app.use(cookieParser()); // парсер куки
+app.use(helmet()); // Помогает защитить приложение от некоторых
+// широко известных веб-уязвимостей путем соответствующей настройки заголовков HTTP
 
 // логгер запросов
 app.use(requestLogger);
+
+app.use(rateLimit);
 
 app.use(routes);
 
